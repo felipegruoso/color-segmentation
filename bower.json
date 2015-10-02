@@ -1,0 +1,26 @@
+{
+  "name": "color-segmentation",
+  "version": "0.0.0",
+  "homepage": "https://github.com/felipegruoso/color-segmentation",
+  "authors": [
+    "Felipe Gadelha Ruoso <felipe.gruoso@gmail.com>"
+  ],
+  "description": "Segments images by color.",
+  "main": "index.html",
+  "moduleType": [
+    "amd"
+  ],
+  "keywords": [
+    "segmentation",
+    "image",
+    "color"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
