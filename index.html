@@ -10,7 +10,6 @@
   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
 
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="bower_components/materialize/dist/css/materialize.css" />
 </head>
 <body>
@@ -32,21 +31,85 @@
   </nav>
 
   <!-- Container -->
-  <div class="container">
-    <div class="row">
+  <main>
+    <div class="container">
+      <div class="row">
 
-      <!-- CONTENT IMAGE -->
-      <div id="content" class="col-md-8 col-md-push-4">
-        CONTENT
+        <!-- CONTENT IMAGE -->
+        <div id="content" class="col s8 m6">
+          CONTENT
+        </div>
+
+        <!-- MENU RGB -->
+        <div id="menu" class="col s4 m6">
+          <div class="card-panel">
+            <div class="row">
+              <div class="col s12">
+                <div class="col s2">
+                  R:
+                </div>
+                <div class="col s6">
+                  <p class="range-field">
+                    <input type="range" id="mnrange" name="mmrange" class="form-control" />
+                  </p>
+                </div>
+                <div class="col s2">
+                  <input type="text" id="red" name="red" class="form-control"/>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s12">
+                <div class="col s2">
+                  G:
+                </div>
+                <div class="col s6">
+                  <p class="range-field">
+                    <input type="range" id="mnrange" name="mmrange" class="form-control" />
+                  </p>
+                </div>
+                <div class="col s2">
+                  <input type="text" id="red" name="red" class="form-control"/>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s12">
+                <div class="col s2">
+                  B:
+                </div>
+                <div class="col s6">
+                  <p class="range-field">
+                    <input type="range" id="mnrange" name="mmrange" class="form-control" />
+                  </p>
+                </div>
+                <div class="col s2">
+                  <input type="text" id="red" name="red" class="form-control"/>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s12">
+                <div class="col s2">
+                  A:
+                </div>
+                <div class="col s6">
+                  <p class="range-field">
+                    <input type="range" id="mnrange" name="mmrange" class="form-control" />
+                  </p>
+                </div>
+                <div class="col s2">
+                  <input type="text" id="red" name="red" class="form-control"/>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+
       </div>
-
-      <!-- MENU RGB -->
-      <div id="menu" class="col-md-4 col-md-pull-8">
-        MENU
-      </div>
-
     </div>
-  </div>
+  </main>
 
   <!--JavaScraipt -->
   <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
