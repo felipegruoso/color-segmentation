@@ -3,6 +3,7 @@
 <head>
   <title>Color Segmentation</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <link rel="icon" href="favicon.ico">
   <meta name="viewport"
         content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes" />
 
@@ -11,100 +12,24 @@
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="bower_components/materialize/dist/css/materialize.css" />
+  <link rel="stylesheet" href="assets/css/ghpages-materialize.css" />
+
 </head>
 <body>
-  <!-- Menu -->
-  <nav class="light-blue lighten-1" role="navigation">
-    <div class="nav-wrapper container">
-      <a id="logo-container" href="#" class="brand-logo">Logo</a>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="#">DOC</a></li>
-        <li><a href="#">GITHUB</a></li>
-      </ul>
-
-      <ul id="nav-mobile" class="side-nav" style="left: -250px;">
-        <li><a href="#">DOC</a></li>
-        <li><a href="#">GITHUB</a></li>
-      </ul>
-      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-    </div>
-  </nav>
+  <header>
+    <div class="container"><a href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only"><i class="mdi-navigation-menu"></i></a></div>
+    <ul id="nav-mobile" class="side-nav fixed" style="width: 300px;">
+      <li class="logo">Teste</li>
+    </ul>
+  </header>
 
   <!-- Container -->
   <main>
     <div class="container">
       <div class="row">
-
         <!-- CONTENT IMAGE -->
-        <div id="content" class="col s8 m6">
+        <div id="content" class="col s12 m8 l12 lighten grey lighten-4">
           CONTENT
-        </div>
-
-        <!-- MENU RGB -->
-        <div id="menu" class="col s4 m6">
-          <div class="card-panel">
-            <div class="row">
-              <div class="col s12">
-                <div class="col s2">
-                  R:
-                </div>
-                <div class="col s6">
-                  <p class="range-field">
-                    <input type="range" id="mnrange" name="mmrange" class="form-control" />
-                  </p>
-                </div>
-                <div class="col s2">
-                  <input type="text" id="red" name="red" class="form-control"/>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col s12">
-                <div class="col s2">
-                  G:
-                </div>
-                <div class="col s6">
-                  <p class="range-field">
-                    <input type="range" id="mnrange" name="mmrange" class="form-control" />
-                  </p>
-                </div>
-                <div class="col s2">
-                  <input type="text" id="red" name="red" class="form-control"/>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col s12">
-                <div class="col s2">
-                  B:
-                </div>
-                <div class="col s6">
-                  <p class="range-field">
-                    <input type="range" id="mnrange" name="mmrange" class="form-control" />
-                  </p>
-                </div>
-                <div class="col s2">
-                  <input type="text" id="red" name="red" class="form-control"/>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col s12">
-                <div class="col s2">
-                  A:
-                </div>
-                <div class="col s6">
-                  <p class="range-field">
-                    <input type="range" id="mnrange" name="mmrange" class="form-control" />
-                  </p>
-                </div>
-                <div class="col s2">
-                  <input type="text" id="red" name="red" class="form-control"/>
-                </div>
-              </div>
-            </div>
-            </div>
-          </div>
         </div>
 
       </div>
