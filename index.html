@@ -14,31 +14,131 @@
   <link rel="stylesheet" href="bower_components/materialize/dist/css/materialize.css" />
   <link rel="stylesheet" href="assets/css/ghpages-materialize.css" />
 
+  <link rel="stylesheet" href="bower_components/nouislider/distribute/nouislider.min.css" />
+  <style>
+    .sliders {
+      margin: 5px;
+     /* line-height: 5px;
+      display: inline-block;
+     */ height: 200px;
+    }
+
+    #result {
+      height: 100px;
+      width: 100px;
+      display: inline-block;
+      vertical-align: top;
+      color: rgb(127, 127, 127);
+      background: rgb(127, 127, 127);
+      box-shadow: 0px 0px 10px;
+    }
+
+    input[type="text"]{
+      width: 28px;
+    }
+
+    .red {
+      background: #f44336;
+    }
+
+    .green {
+      background: #4caf50;
+    }
+
+    .blue {
+      background: #2196f3;
+    }
+
+    .alpha {
+      background: #eee;
+    }
+
+    .fill-controls {
+      margin: 2px;
+      padding: 5px;
+    }
+
+  </style>
 </head>
-<body>
-  <header>
-    <div class="container"><a href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only"><i class="mdi-navigation-menu"></i></a></div>
-    <ul id="nav-mobile" class="side-nav fixed" style="width: 300px;">
-      <li class="logo">Teste</li>
-    </ul>
-  </header>
-
+<body class="lighten grey lighten-4">
   <!-- Container -->
-  <main>
-    <div class="container">
-      <div class="row">
-        <!-- CONTENT IMAGE -->
-        <div id="content" class="col s12 m8 l12 lighten grey lighten-4">
-          CONTENT
+  <div class="row">
+    <div class="center col s12 m6">
+      <div class="file-field input-field">
+        <div class="btn">
+          <span>File</span>
+          <input type="file" multiple>
         </div>
-
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text" placeholder="Upload one or more files">
+        </div>
       </div>
     </div>
-  </main>
-
+    <div id="content" class="col s12 m7">
+      <div class="row">
+        <div class="col s12 m5">
+          <div class="card-panel teal">
+            <span class="white-text">I am a very simple card. I am good at containing small bits of information.
+            I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
+            </span>
+          </div>
+        </div>
+        <div class="col s12 m5">
+          <div class="card-panel teal">
+            <span class="white-text">I am a very simple card. I am good at containing small bits of information.
+            I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
+            </span>
+          </div>
+        </div>
+        <div class="col s12 m5">
+          <div class="card-panel teal">
+            <span class="white-text">I am a very simple card. I am good at containing small bits of information.
+            I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
+            </span>
+          </div>
+        </div>
+        <div class="col s12 m5">
+          <div class="card-panel teal">
+            <span class="white-text">I am a very simple card. I am good at containing small bits of information.
+            I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
+            </span>
+          </div>
+        </div>
+        <div class="col s12 m5">
+          <div class="card-panel teal">
+            <span class="white-text">I am a very simple card. I am good at containing small bits of information.
+            I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
+            </span>
+          </div>
+        </div>
+        <div class="col s12 m5">
+          <div class="card-panel teal">
+            <span class="white-text">I am a very simple card. I am good at containing small bits of information.
+            I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="menu" class="col s12 m5">
+      <div class="controls">
+      </div>
+      <div class="center-align">
+        <a id="add" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+      </div>
+    </div>
+  </div>
   <!--JavaScraipt -->
   <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
   <script type="text/javascript" src="bower_components/materialize/dist/js/materialize.min.js"></script>
+  <script type="text/javascript" src="bower_components/nouislider/distribute/nouislider.min.js"></script>
+  <script type="text/javascript" src="assets/js/controls.js"></script>
+  <script type="text/javascript">
+    var button = document.getElementById("add");
+    button.addEventListener('click', function(){
+      getControls();
+    });
+  </script>
 
 </body>
 </html>

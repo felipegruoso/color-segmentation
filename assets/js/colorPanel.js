@@ -14,12 +14,6 @@ updateRange = function(output) {
   output.val(value);
 };
 
-addColor = function() {
-  $.get('views/controls.html?' + Date.now(), function(data) {
-    $('#menu').append(data);
-  });
-};
-
 $(document).on('change', 'input[type="range"]', function() {
   showRange($(this));
 });
