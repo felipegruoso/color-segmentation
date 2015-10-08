@@ -6,6 +6,11 @@
 function updateRange(input) {
 
   var value = input.val().replace(/\D/, "");
+
+  if(isNaN(parseInt(value))) {
+    value = 0;
+  }
+
   input.val(value);
 
   var mainDiv   = input.closest('.col')[0];
@@ -15,12 +20,12 @@ function updateRange(input) {
   var lowValue  = parseInt(lowInput.value);
   var highValue = parseInt(highInput.value);
 
+
   if(lowValue <= highValue) {
     lowInput.style.color  = 'black';
     highInput.style.color = 'black';
 
-    slider.noUiSlider.set([null, highValue]);
-    slider.noUiSlider.set([lowValue, null]);
+    slider.noUiSlider.set([lowValue, highValue]);
   } else {
     input.context.style.color = 'red';
   }
