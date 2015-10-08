@@ -1,4 +1,10 @@
-var createSlider = function(slider, color) {
+//
+// Creates a range slider for RGBA colors on panel.
+//
+// @param { Object } the div to render the slider.
+// @param { String } the slider color.
+//
+function createSlider(slider, color) {
   noUiSlider.create(slider, {
       start: [0, 255],
       step: 1,
@@ -33,12 +39,26 @@ var createSlider = function(slider, color) {
       }
 
       connectBar.style[side] = offset + '%';
+
+      var value = values[handle];
+
+      var mainDiv = connectBase.parentNode.parentNode;
+      if ( handle ) {
+        var input = mainDiv.children[0].value = Math.floor(value);
+
+      } else {
+        var input = mainDiv.children[2].value = Math.floor(value);
+
+      }
   });
 
   connectBase.children[0].className += ' ' + color;
 }
 
-var loadSliders = function(){
+//
+// Creates the RGBA panel's sliders.
+//
+function createSliders() {
   var controls = document.getElementsByClassName('controls');
   var cards    = controls[0].getElementsByClassName('card');
   var card     = cards[cards.length -1];
@@ -50,13 +70,23 @@ var loadSliders = function(){
   }
 }
 
-var getControls = function(){
+//
+// Requests the RGBA controls.
+//
+function getControls() {
   $.get('partials/controls.html', function(data){
     $('.controls').append(data);
   })
   .done(function(){
-    loadSliders();
+    createSliders();
   });
 }
+
+//
+// Handles the button click to add an RGBA panel.
+//
+$('#add').on('click', function() {
+  getControls();
+});
 
 getControls();

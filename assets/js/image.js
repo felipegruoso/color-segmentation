@@ -4,19 +4,9 @@
 var images  = new Array();
 
 //
-// Initializes an array with the sliders divs.
-//
-var sliders = document.getElementsByClassName('sliders');
-
-//
-// Initializes an array with the sliders colors.
-//
-var colors  = ['red', 'green', 'blue', 'alpha'];
-
-//
 // Removes a specific image card.
 //
-// @param { Object } the clicked button.
+// @param { Object } btn the clicked button.
 //
 function removeCard(btn) {
   id         = btn.context.dataset['id'];
@@ -90,7 +80,7 @@ function addOnScreen(images){
         }
 
         var card          = document.createElement('div');
-        card.className    = 'card-panel center-content';
+        card.className    = 'card-panel center-align';
         card.style.width  = cardWidth;
         card.style.height = images[i].height + 90 + 'px';
 
@@ -149,7 +139,7 @@ function segmentImages(rgbas, fillingColor, backgroundColor) {
 
       var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
 
-      var image = document.getElementById('canvas-' + i)
+      var image   = document.getElementById('canvas-' + i)
       var context = image.getContext('2d');
 
       for(var x = 0; x < canvas.width; x++) {
@@ -264,73 +254,6 @@ function getBackgroundColor() {
 }
 
 //
-// Creates the range slider for RGBA colors on panel.
-//
-// @param { Object } the div to render the slider.
-// @param { String } the slider color.
-//
-function createSlider(slider, color) {
-
-  noUiSlider.create(slider, {
-    start: [0, 255],
-    step: 1,
-    connect: true,
-    direction: 'rtl',
-    orientation: 'vertical',
-    behaviour: 'tap-drag',
-    range: {
-      'min': 0,
-      'max': 255
-    }
-  });
-
-  var connectBar = document.createElement('div'),
-  connectBase    = slider.getElementsByClassName('noUi-base')[0],
-  connectHandles = slider.getElementsByClassName('noUi-origin');
-
-  // Give the bar a class for styling and add it to the slider.
-  connectBar.className += 'connect';
-  connectBase.appendChild(connectBar);
-
-  slider.noUiSlider.on('update', function( values, handle ) {
-
-      // Pick left for the first handle, right for the second.
-    var side = handle ? 'right' : 'left',
-    // Get the handle position and trim the '%' sign.
-      offset = (connectHandles[handle].style.left).slice(0, - 1);
-
-    // Right offset is 100% - left offset
-    if ( handle === 1 ) {
-        offset = 100 - offset;
-    }
-
-    connectBar.style[side] = offset + '%';
-
-    var value = values[handle];
-
-    var mainDiv = connectBase.parentNode.parentNode;
-    if ( handle ) {
-      var input = mainDiv.children[0].value = Math.floor(value);
-
-    } else {
-      var input = mainDiv.children[2].value = Math.floor(value);
-
-    }
-  });
-
-  connectBase.children[0].className += ' ' + color;
-}
-
-//
-// Creates the RGBA panel sliders.
-//
-function createSliders() {
-  for ( var i = 0; i < sliders.length; i++ ) {
-      createSlider(sliders[i], colors[i]);
-  }
-}
-
-//
 // Handles the click on convert button.
 //
 $(document).on('click', '#convert', function() {
@@ -345,6 +268,7 @@ $(document).on('click', '#convert', function() {
 // Handles the changes on files input.
 //
 $(document).on('change', '#input-files', function() {
+  $('#input-legend').val('');
   checkImageInputs($(this), addOnScreen);
 });
 
@@ -354,5 +278,3 @@ $(document).on('change', '#input-files', function() {
 $(document).on('click', '.remove-card', function() {
   removeCard($(this));
 });
-
-createSliders();

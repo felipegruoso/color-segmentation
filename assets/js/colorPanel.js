@@ -1,28 +1,28 @@
 //
 // Updates the sliders according to input values.
 //
-// @param { Object } output the input that shows the slider value.
+// @param { Object } input the input that shows the slider value.
 //
-updateRange = function(output) {
+function updateRange(input) {
 
-  var value = output.val().replace(/\D/, "");
-  output.val(value);
+  var value = input.val().replace(/\D/, "");
+  input.val(value);
 
-  var mainDiv    = output.closest('.col')[0];
-  var slider     = mainDiv.children[1];
-  var lowOutput  = mainDiv.children[2];
-  var highOutput = mainDiv.children[0];
-  var lowValue   = parseInt(lowOutput.value);
-  var highValue  = parseInt(highOutput.value);
+  var mainDiv   = input.closest('.col')[0];
+  var slider    = mainDiv.children[1];
+  var lowInput  = mainDiv.children[2];
+  var highInput = mainDiv.children[0];
+  var lowValue  = parseInt(lowInput.value);
+  var highValue = parseInt(highInput.value);
 
   if(lowValue <= highValue) {
-    lowOutput.style.color  = 'black';
-    highOutput.style.color = 'black';
+    lowInput.style.color  = 'black';
+    highInput.style.color = 'black';
 
     slider.noUiSlider.set([null, highValue]);
     slider.noUiSlider.set([lowValue, null]);
   } else {
-    output.context.style.color = 'red';
+    input.context.style.color = 'red';
   }
 };
 
