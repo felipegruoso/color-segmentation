@@ -40,16 +40,15 @@ function createSlider(slider, color) {
 
       connectBar.style[side] = offset + '%';
 
-      var value = values[handle];
+      var mainDiv   = connectBase.parentNode.parentNode;
+      var highInput = mainDiv.children[0];
+      var lowInput  = mainDiv.children[2];
 
-      var mainDiv = connectBase.parentNode.parentNode;
-      if ( handle ) {
-        var input = mainDiv.children[0].value = Math.floor(value);
+      highInput.value = parseInt(values[1]);
+      lowInput.value  = parseInt(values[0]);
 
-      } else {
-        var input = mainDiv.children[2].value = Math.floor(value);
-
-      }
+      highInput.style.color = 'black';
+      lowInput.style.color  = 'black';
   });
 
   connectBase.children[0].className += ' ' + color;
