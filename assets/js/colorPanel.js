@@ -1,29 +1,34 @@
-showRange = function(input) {
-  var output_id = input.attr('name');
-  var parent    = input.closest('#control');
-
-  parent.find('#' + output_id).val(input.val());
-};
-
+//
+// Updates the sliders according to input values.
+//
+// @param { Object } output the input that shows the slider value.
+//
 updateRange = function(output) {
-  var input_id = output.attr('name');
-  var parent   = output.closest('#control');
-  var value    = output.val().replace(/\D/, "");
 
-  parent.find('#' + input_id).val(value);
+  var value = output.val().replace(/\D/, "");
   output.val(value);
+
+  var mainDiv    = output.closest('.col')[0];
+  var slider     = mainDiv.children[1];
+  var lowOutput  = mainDiv.children[2];
+  var highOutput = mainDiv.children[0];
+  var lowValue   = parseInt(lowOutput.value);
+  var highValue  = parseInt(highOutput.value);
+
+  if(lowValue <= highValue) {
+    lowOutput.style.color  = 'black';
+    highOutput.style.color = 'black';
+
+    slider.noUiSlider.set([null, highValue]);
+    slider.noUiSlider.set([lowValue, null]);
+  } else {
+    output.context.style.color = 'red';
+  }
 };
 
-addColor = function() {
-  $.get('views/controls.html?' + Date.now(), function(data) {
-    $('#menu').append(data);
-  });
-};
-
-$(document).on('change', 'input[type="range"]', function() {
-  showRange($(this));
-});
-
+//
+// Handles changes on input value.
+//
 $(document).on('keyup', 'input[type="text"]', function() {
   updateRange($(this));
 });

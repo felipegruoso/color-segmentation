@@ -1,104 +1,358 @@
-var images = new Array();
+//
+// Initializes an array to hold the uploaded images.
+//
+var images  = new Array();
 
+//
+// Initializes an array with the sliders divs.
+//
+var sliders = document.getElementsByClassName('sliders');
+
+//
+// Initializes an array with the sliders colors.
+//
+var colors  = ['red', 'green', 'blue', 'alpha'];
+
+//
+// Removes a specific image card.
+//
+// @param { Object } the clicked button.
+//
 function removeCard(btn) {
-    id         = btn.context.dataset['id'];
-    images[id] = null;
-    btn.closest('.card-panel').remove();
+  id         = btn.context.dataset['id'];
+  images[id] = null;
+  btn.closest('.card-panel').remove();
 }
 
+//
+// Checks ths input files.
+//
+// @param { Object }   input the input.
+// @param { Function } callback the callback function to be executed
+//                     after the process ends.
+//
 function checkImageInputs(input, callback) {
-    var fileInputs = input[0];
-    var left       = fileInputs.files.length;
+  var fileInputs = input[0];
+  var left       = fileInputs.files.length;
 
-    for (var i = 0; i < fileInputs.files.length; i++) {
-        var fr = new FileReader();
-        fr.onload = function(e) {
-            var img       = document.createElement('img');
-            img.src       = e.target.result;
-            img.className = 'file-result';
+  for (var i = 0; i < fileInputs.files.length; i++) {
+    var fr = new FileReader();
+    fr.onload = function(e) {
+      var img       = document.createElement('img');
+      img.src       = e.target.result;
+      img.className = 'file-result';
 
-            var exists = false;
-            for(var x = 0; x < images.length; x ++) {
-                if(images[x] != null) {
-                    if(images[x].src == img.src) {
-                        exists = true;
-                    }
-                }
-            }
-
-            if(!exists) {
-                images.push(img);
-            }
-
-            left--;
-            if(!left) {
-                setTimeout(function() {
-                    callback(images);
-                }, 1000);
-            }
+      var exists = false;
+      for(var x = 0; x < images.length; x ++) {
+        if(images[x] != null) {
+          if(images[x].src == img.src) {
+            exists = true;
+          }
         }
-        fr.readAsDataURL(fileInputs.files[i]);
+      }
+
+      if(!exists) {
+        images.push(img);
+      }
+
+      left--;
+      if(!left) {
+        setTimeout(function() {
+          callback(images);
+        }, 1000);
+      }
     }
+    fr.readAsDataURL(fileInputs.files[i]);
+  }
 }
 
-function postProcess(images){
+//
+// Adds the new images to screen ignoring duplicated images.
+//
+// @param { Object } images an array of images from input.
+//
+function addOnScreen(images){
 
-    for(var i = 0; i < images.length; i ++) {
+  for(var i = 0; i < images.length; i ++) {
 
-        if(images[i] != null) {
+    if(images[i] != null) {
 
-            var id     = 'canvas-' + i;
-            var canvas = document.getElementById(id)
+      var id     = 'canvas-' + i;
+      var canvas = document.getElementById(id)
 
-            if(canvas == null) {
+      if(canvas == null) {
 
-                var cardWidth;
-                if((images[i].width + 40) < 95) {
-                    cardWidth = '95px'
-                } else {
-                    cardWidth = images[i].width + 40 + 'px'
-                }
-
-                var card          = document.createElement('div');
-                card.className    = 'card-panel center-content';
-                card.style.width  = cardWidth;
-                card.style.height = images[i].height + 90 + 'px';
-
-                var divDel         = document.createElement('div');
-                divDel.style.width = '100%';
-
-                var btnDel       = document.createElement('a');
-                btnDel.className = 'btn-floating btn-large waves-effect waves-light red remove-card';
-                btnDel.setAttribute("data-id", i);
-
-                var iconDel       = document.createElement('i');
-                iconDel.className = 'material-icons';
-                iconDel.innerHTML = 'close';
-
-                btnDel.appendChild(iconDel);
-                divDel.appendChild(btnDel);
-
-                var canvas    = document.createElement('canvas');
-                canvas.id     = id;
-                canvas.width  = images[i].width;
-                canvas.height = images[i].height;
-
-                var context = canvas.getContext("2d");
-                context.drawImage(images[i], 0, 0);
-
-                card.appendChild(canvas);
-                card.appendChild(divDel);
-                document.getElementById('content').appendChild(card);
-            }
+        var cardWidth;
+        if((images[i].width + 40) < 95) {
+            cardWidth = '95px'
+        } else {
+          cardWidth = images[i].width + 40 + 'px'
         }
 
+        var card          = document.createElement('div');
+        card.className    = 'card-panel center-content';
+        card.style.width  = cardWidth;
+        card.style.height = images[i].height + 90 + 'px';
+
+        var divDel         = document.createElement('div');
+        divDel.style.width = '100%';
+
+        var btnDel       = document.createElement('a');
+        btnDel.className = 'btn-floating btn-large waves-effect waves-light red remove-card';
+        btnDel.setAttribute("data-id", i);
+
+        var iconDel       = document.createElement('i');
+        iconDel.className = 'material-icons';
+        iconDel.innerHTML = 'close';
+
+        btnDel.appendChild(iconDel);
+        divDel.appendChild(btnDel);
+
+        var canvas    = document.createElement('canvas');
+        canvas.id     = id;
+        canvas.width  = images[i].width;
+        canvas.height = images[i].height;
+
+        var context = canvas.getContext("2d");
+        context.drawImage(images[i], 0, 0);
+
+        card.appendChild(canvas);
+        card.appendChild(divDel);
+        document.getElementById('content').appendChild(card);
+      }
+
     }
+
+  }
+
 }
 
-$(document).on('change', '#input-files', function() {
-    checkImageInputs($(this), postProcess);
+//
+// Segments the images by the given colors.
+//
+// @param { Object } rgbas an array containing the RGBA colors intervals.
+// @param { Object } fillingColor an array containing an unique RGBA color
+//                   that will be used to fill the intervals matches.
+// @param { Object } backgroundColor an array containint an unique RGBA color
+//                   that will be used to fill the background.
+//
+function segmentImages(rgbas, fillingColor, backgroundColor) {
+
+  for(var i = 0; i < images.length; i ++) {
+    if(images[i] != null) {
+      var canvas    = document.createElement('canvas');
+      canvas.width  = images[i].width;
+      canvas.height = images[i].height;
+
+      var context = canvas.getContext('2d');
+      context.drawImage(images[i], 0, 0);
+
+      var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+
+      var image = document.getElementById('canvas-' + i)
+      var context = image.getContext('2d');
+
+      for(var x = 0; x < canvas.width; x++) {
+        for(var y = 0; y < canvas.height; y++){
+
+          var index = (y*imageData.width + x) * 4;
+          var red   = imageData.data[index];
+          var green = imageData.data[index + 1];
+          var blue  = imageData.data[index + 2];
+          var alpha = imageData.data[index + 3];
+          var pixel = [red, green, blue, alpha];
+
+          var id         = context.createImageData(1,1); // only do this once per page
+          var new_pixel  = id.data;
+
+          if(fillingColor == null) {
+              fillingColor = pixel;
+          }
+
+          if(backgroundColor == null) {
+            backgroundColor = [255, 255, 255, 255];
+          }
+
+          var statement = createStatement(rgbas, pixel);
+          if(eval(statement)) {                        // only do this once per page
+            new_pixel[0] = fillingColor[0];
+            new_pixel[1] = fillingColor[1];
+            new_pixel[2] = fillingColor[2];
+            new_pixel[3] = fillingColor[3];
+          } else {
+            new_pixel[0] = backgroundColor[0];
+            new_pixel[1] = backgroundColor[1];
+            new_pixel[2] = backgroundColor[2];
+            new_pixel[3] = backgroundColor[3];
+          }
+          context.putImageData( id, x, y );
+        }
+      }
+
+    }
+
+  }
+
+}
+
+//
+// Creates the if statement to evaluate the image's pixels.
+//
+// @param { Object } args an array containing the arguments given
+//                   on the RGBA panel.
+// @param { Object } pixel an array containing the pixel's RGBA.
+//
+// @return { String } the final if statement.
+//
+function createStatement(args, pixel) {
+  var statement = []
+
+  for(var i = 0; i < args.length; i++) {
+    var stmt = '';
+
+    stmt += '(';
+    stmt += args[i]["minred"]   + ' <= ' + pixel[0] + ' && ';
+    stmt += args[i]["maxred"]   + ' >= ' + pixel[0] + ' && ';
+    stmt += args[i]["mingreen"] + ' <= ' + pixel[1] + ' && ';
+    stmt += args[i]["maxgreen"] + ' >= ' + pixel[1] + ' && ';
+    stmt += args[i]["minblue"]  + ' <= ' + pixel[2] + ' && ';
+    stmt += args[i]["maxblue"]  + ' >= ' + pixel[2] + ' && ';
+    stmt += args[i]["minalpha"] + ' <= ' + pixel[3] + ' && ';
+    stmt += args[i]["maxalpha"] + ' >= ' + pixel[3];
+    stmt += ')';
+
+    statement.push(stmt);
+  }
+
+  return statement.join(' || ');
+}
+
+//
+// Gets the RGBA panel values.
+//
+// @return { Object } an array containing the RGBA panels values.
+//
+function getControlValues() {
+  var args = [];
+
+  args.push({
+    minred:   100, maxred:   255,
+    mingreen: 0,   maxgreen: 255,
+    minblue:  0,   maxblue:  255,
+    minalpha: 0,   maxalpha: 255
+  });
+
+  return args;
+}
+
+//
+// Gets the color to fill the matches.
+//
+// @return { Object } an array containing the RGBA color.
+//
+function getFillingColor() {
+  return [0, 0, 0, 255];
+}
+
+//
+// Gets the color to fill the background.
+//
+// @return { Object } an array containing the RGBA color.
+//
+function getBackgroundColor() {
+  return [255, 255, 255, 255];
+}
+
+//
+// Creates the range slider for RGBA colors on panel.
+//
+// @param { Object } the div to render the slider.
+// @param { String } the slider color.
+//
+function createSlider(slider, color) {
+
+  noUiSlider.create(slider, {
+    start: [0, 255],
+    step: 1,
+    connect: true,
+    direction: 'rtl',
+    orientation: 'vertical',
+    behaviour: 'tap-drag',
+    range: {
+      'min': 0,
+      'max': 255
+    }
+  });
+
+  var connectBar = document.createElement('div'),
+  connectBase    = slider.getElementsByClassName('noUi-base')[0],
+  connectHandles = slider.getElementsByClassName('noUi-origin');
+
+  // Give the bar a class for styling and add it to the slider.
+  connectBar.className += 'connect';
+  connectBase.appendChild(connectBar);
+
+  slider.noUiSlider.on('update', function( values, handle ) {
+
+      // Pick left for the first handle, right for the second.
+    var side = handle ? 'right' : 'left',
+    // Get the handle position and trim the '%' sign.
+      offset = (connectHandles[handle].style.left).slice(0, - 1);
+
+    // Right offset is 100% - left offset
+    if ( handle === 1 ) {
+        offset = 100 - offset;
+    }
+
+    connectBar.style[side] = offset + '%';
+
+    var value = values[handle];
+
+    var mainDiv = connectBase.parentNode.parentNode;
+    if ( handle ) {
+      var input = mainDiv.children[0].value = Math.floor(value);
+
+    } else {
+      var input = mainDiv.children[2].value = Math.floor(value);
+
+    }
+  });
+
+  connectBase.children[0].className += ' ' + color;
+}
+
+//
+// Creates the RGBA panel sliders.
+//
+function createSliders() {
+  for ( var i = 0; i < sliders.length; i++ ) {
+      createSlider(sliders[i], colors[i]);
+  }
+}
+
+//
+// Handles the click on convert button.
+//
+$(document).on('click', '#convert', function() {
+  var rgbas           = getControlValues();
+  var fillingColor    = getFillingColor();
+  var backgroundColor = getBackgroundColor();
+
+  segmentImages(rgbas, fillingColor, backgroundColor);
 });
 
+//
+// Handles the changes on files input.
+//
+$(document).on('change', '#input-files', function() {
+  checkImageInputs($(this), addOnScreen);
+});
+
+//
+// handles the click on button to remove an image.
+//
 $(document).on('click', '.remove-card', function() {
-    removeCard($(this));
-})
+  removeCard($(this));
+});
+
+createSliders();

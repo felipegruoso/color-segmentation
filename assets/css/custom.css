@@ -1,3 +1,43 @@
 .center-content {
   text-align: center;
 }
+
+.sliders {
+  margin: 5px;
+  height: 200px;
+}
+
+.result {
+  height: 100px;
+  width: 100px;
+  display: inline-block;
+  vertical-align: top;
+  color: rgb(127, 127, 127);
+  background: rgb(127, 127, 127);
+  box-shadow: 0 0 10px;
+}
+
+.red {
+  background: #f44336;
+}
+
+.green {
+  background: #4caf50;
+}
+
+.blue {
+  background: #2196f3;
+}
+
+.alpha {
+  background: #eee;
+}
+
+.fill-controls {
+  margin: 2px;
+  padding: 5px;
+}
+
+input[type='text'] {
+  width: 28px;
+}
