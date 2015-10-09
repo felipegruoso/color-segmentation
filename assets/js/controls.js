@@ -70,22 +70,66 @@ function createSliders() {
 }
 
 //
+// Adds a button to remove the RGBA panel.
+//
+function addRemoveButton() {
+  var controls = document.getElementsByClassName('controls');
+  var cards    = controls[0].children.length;
+
+  var button       = document.createElement('a');
+  button.className = "right btn-floating btn-large waves-effect waves-light red remove-rgba";
+
+  var icon       = document.createElement('i');
+  icon.className = "material-icons";
+  icon.innerHTML = 'close';
+
+  button.appendChild(icon);
+
+  controls[0].children[cards - 1].appendChild(button);
+}
+
+//
 // Requests the RGBA controls.
 //
-function getControls() {
+// @param { Boolean } withRemoveButton if should add a button
+//                    to remove the control or not.
+//
+function getControls(withRemoveButton) {
   $.get('partials/controls.html', function(data){
     $('.controls').append(data);
   })
   .done(function(){
     createSliders();
+
+    if(withRemoveButton) {
+      addRemoveButton();
+    }
+
   });
+}
+
+//
+// Removes a specific RGBA panel.
+//
+// @param { Object } btn the clicked button.
+//
+function removeRGBAPanel(btn) {
+  btn.context.parentNode.remove();
 }
 
 //
 // Handles the button click to add an RGBA panel.
 //
 $('#add').on('click', function() {
-  getControls();
+  var withRemoveButton = true;
+  getControls(withRemoveButton);
 });
+
+//
+// Handles the button click to remove RGBA panel.
+//
+$(document).on('click', '.remove-rgba', function() {
+  removeRGBAPanel($(this));
+})
 
 getControls();
