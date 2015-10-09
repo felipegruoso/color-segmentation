@@ -223,14 +223,29 @@ function createStatement(args, pixel) {
 // @return { Object } an array containing the RGBA panels values.
 //
 function getControlValues() {
-  var args = [];
+  var args     = [];
+  var controls = document.getElementsByClassName('card');
 
-  args.push({
-    minred:   100, maxred:   255,
-    mingreen: 0,   maxgreen: 255,
-    minblue:  0,   maxblue:  255,
-    minalpha: 0,   maxalpha: 255
-  });
+  for(var i = 0; i < controls.length; i ++) {
+    var card = $(controls[i]);
+
+    var minred   = card.find('#lowred').val();
+    var maxred   = card.find('#highred').val();
+    var mingreen = card.find('#lowgreen').val();
+    var maxgreen = card.find('#highgreen').val();
+    var minblue  = card.find('#lowblue').val();
+    var maxblue  = card.find('#highblue').val();
+    var minalpha = card.find('#lowalpha').val();
+    var maxalpha = card.find('#highalpha').val();
+
+    args.push({
+      minred:   minred,   maxred:   maxred,
+      mingreen: mingreen, maxgreen: maxgreen,
+      minblue:  minblue,  maxblue:  maxblue,
+      minalpha: minalpha, maxalpha: maxalpha
+    });
+  }
+
 
   return args;
 }
