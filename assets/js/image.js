@@ -142,6 +142,8 @@ function segmentImages(rgbas, fillingColor, backgroundColor) {
       var image   = document.getElementById('canvas-' + i)
       var context = image.getContext('2d');
 
+      var defaultFilling = fillingColor;
+
       for(var x = 0; x < canvas.width; x++) {
         for(var y = 0; y < canvas.height; y++){
 
@@ -152,18 +154,15 @@ function segmentImages(rgbas, fillingColor, backgroundColor) {
           var alpha = imageData.data[index + 3];
           var pixel = [red, green, blue, alpha];
 
-          var id         = context.createImageData(1,1); // only do this once per page
-          var new_pixel  = id.data;
+          var id        = context.createImageData(1,1); // only do this once per page
+          var new_pixel = id.data;
 
-          if(fillingColor == null) {
-              fillingColor = pixel;
-          }
-
-          if(backgroundColor == null) {
-            backgroundColor = [255, 255, 255, 255];
+          if(!defaultFilling) {
+            fillingColor = pixel;
           }
 
           var statement = createStatement(rgbas, pixel);
+
           if(eval(statement)) {                        // only do this once per page
             new_pixel[0] = fillingColor[0];
             new_pixel[1] = fillingColor[1];
@@ -256,7 +255,7 @@ function getControlValues() {
 // @return { Object } an array containing the RGBA color.
 //
 function getFillingColor() {
-  return [0, 0, 0, 255];
+  return null;
 }
 
 //
