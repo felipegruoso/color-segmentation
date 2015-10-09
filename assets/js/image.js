@@ -280,6 +280,19 @@ $(document).on('click', '#convert', function() {
 });
 
 //
+// Handles the click on clear button.
+//
+$(document).on('click', '#clear', function() {
+  var cards = $('#content > .card-panel');
+
+  for(var i = 0; i < cards.length; i ++) {
+    var btn = $(cards[i]).find('.remove-card')[0];
+
+    removeCard($(btn));
+  }
+});
+
+//
 // Handles the changes on files input.
 //
 $(document).on('change', '#input-files', function() {
