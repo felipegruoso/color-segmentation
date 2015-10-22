@@ -122,16 +122,17 @@ function addOnScreen(images){
 // @param { Object } backgroundColor an array containint an unique RGBA color
 //                   that will be used to fill the background.
 //
-function segmentImages(rgbas, fillingColor, backgroundColor) {
+function segmentImages(rgbas, matchColor, backgroundColor) {
 
   for(var key in images) {
     var image     = images[key];
+    console.log(image);
     var imageData = images[key]['data'];
 
     var img     = document.getElementById('canvas-' + key)
     var context = img.getContext('2d');
 
-    var defaultFilling = fillingColor;
+    var fillingColor;
 
     for(var x = 0; x < image['width']; x++) {
       for(var y = 0; y < image['height']; y++){
@@ -143,16 +144,18 @@ function segmentImages(rgbas, fillingColor, backgroundColor) {
         var alpha = imageData.data[index + 3];
         var pixel = [red, green, blue, alpha];
 
-        var id        = context.createImageData(1,1); // only do this once per page
+        var id        = context.createImageData(1,1);
         var new_pixel = id.data;
 
-        if(!defaultFilling) {
+        if(matchColor == null) {
           fillingColor = pixel;
+        } else {
+          fillingColor = matchColor;
         }
 
         var statement = createStatement(rgbas, pixel);
 
-        if(eval(statement)) {                        // only do this once per page
+        if(eval(statement)) {
           new_pixel[0] = fillingColor[0];
           new_pixel[1] = fillingColor[1];
           new_pixel[2] = fillingColor[2];
