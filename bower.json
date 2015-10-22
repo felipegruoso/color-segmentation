@@ -22,5 +22,10 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "Materialize": "materialize#~0.97.1",
+    "nouislider": "~8.0.2",
+    "materialize-colorpicker": "*"
+  }
 }
