@@ -1,7 +1,7 @@
 //
-// Initializes an array to hold the uploaded images.
+// Initializes an Hash to hold the uploaded images.
 //
-var images  = new Array();
+var images  = {};
 
 //
 // Removes a specific image card.
@@ -9,8 +9,8 @@ var images  = new Array();
 // @param { Object } btn the clicked button.
 //
 function removeCard(btn) {
-  id         = btn.context.dataset['id'];
-  images[id] = null;
+  id = btn.context.dataset['id'];
+  delete images[id];
   btn.closest('.card-panel').remove();
 }
 
@@ -32,17 +32,14 @@ function checkImageInputs(input, callback) {
       img.src       = e.target.result;
       img.className = 'file-result';
 
-      var exists = false;
-      for(var x = 0; x < images.length; x ++) {
-        if(images[x] != null) {
-          if(images[x].src == img.src) {
-            exists = true;
-          }
-        }
-      }
+      md5Image = CryptoJS.MD5(img.src);
 
-      if(!exists) {
-        images.push(img);
+      if(!images[md5Image]) {
+        images[md5Image] = {
+          height: img.height,
+          width:  img.width,
+          data:   img
+        }
       }
 
       left--;
@@ -63,54 +60,53 @@ function checkImageInputs(input, callback) {
 //
 function addOnScreen(images){
 
-  for(var i = 0; i < images.length; i ++) {
+  for(var key in images) {
+    var image  = images[key];
+    var id     = 'canvas-' + key;
+    var canvas = document.getElementById(id)
 
-    if(images[i] != null) {
+    if(canvas == null) {
 
-      var id     = 'canvas-' + i;
-      var canvas = document.getElementById(id)
-
-      if(canvas == null) {
-
-        var cardWidth;
-        if((images[i].width + 40) < 95) {
-            cardWidth = '95px'
-        } else {
-          cardWidth = images[i].width + 40 + 'px'
-        }
-
-        var card          = document.createElement('div');
-        card.className    = 'card-panel center-align';
-        card.style.width  = cardWidth;
-        card.style.height = images[i].height + 90 + 'px';
-
-        var divDel         = document.createElement('div');
-        divDel.style.width = '100%';
-
-        var btnDel       = document.createElement('a');
-        btnDel.className = 'btn-floating btn-large waves-effect waves-light red remove-card';
-        btnDel.setAttribute("data-id", i);
-
-        var iconDel       = document.createElement('i');
-        iconDel.className = 'material-icons';
-        iconDel.innerHTML = 'close';
-
-        btnDel.appendChild(iconDel);
-        divDel.appendChild(btnDel);
-
-        var canvas    = document.createElement('canvas');
-        canvas.id     = id;
-        canvas.width  = images[i].width;
-        canvas.height = images[i].height;
-
-        var context = canvas.getContext("2d");
-        context.drawImage(images[i], 0, 0);
-
-        card.appendChild(canvas);
-        card.appendChild(divDel);
-        document.getElementById('content').appendChild(card);
+      var cardWidth;
+      if((image['width'] + 40) < 95) {
+          cardWidth = '95px'
+      } else {
+        cardWidth = image['width'] + 40 + 'px'
       }
 
+      var card          = document.createElement('div');
+      card.className    = 'card-panel center-align';
+      card.style.width  = cardWidth;
+      card.style.height = image['height'] + 90 + 'px';
+
+      var divDel         = document.createElement('div');
+      divDel.style.width = '100%';
+
+      var btnDel       = document.createElement('a');
+      btnDel.className = 'btn-floating btn-large waves-effect waves-light red remove-card';
+      btnDel.setAttribute("data-id", key);
+
+      var iconDel       = document.createElement('i');
+      iconDel.className = 'material-icons';
+      iconDel.innerHTML = 'close';
+
+      btnDel.appendChild(iconDel);
+      divDel.appendChild(btnDel);
+
+      var canvas    = document.createElement('canvas');
+      canvas.id     = id;
+      canvas.width  = image['width'];
+      canvas.height = image['height'];
+
+      var context = canvas.getContext("2d");
+      context.drawImage(image['data'], 0, 0);
+
+      // Saves the image data to avoid creating new canvas on future.
+      images[key]['data'] = context.getImageData(0, 0, canvas.width, canvas.height);
+
+      card.appendChild(canvas);
+      card.appendChild(divDel);
+      document.getElementById('content').appendChild(card);
     }
 
   }
@@ -128,56 +124,47 @@ function addOnScreen(images){
 //
 function segmentImages(rgbas, fillingColor, backgroundColor) {
 
-  for(var i = 0; i < images.length; i ++) {
-    if(images[i] != null) {
-      var canvas    = document.createElement('canvas');
-      canvas.width  = images[i].width;
-      canvas.height = images[i].height;
+  for(var key in images) {
+    var image     = images[key];
+    var imageData = images[key]['data'];
 
-      var context = canvas.getContext('2d');
-      context.drawImage(images[i], 0, 0);
+    var img     = document.getElementById('canvas-' + key)
+    var context = img.getContext('2d');
 
-      var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+    var defaultFilling = fillingColor;
 
-      var image   = document.getElementById('canvas-' + i)
-      var context = image.getContext('2d');
+    for(var x = 0; x < image['width']; x++) {
+      for(var y = 0; y < image['height']; y++){
 
-      var defaultFilling = fillingColor;
+        var index = (y * imageData.width + x) * 4;
+        var red   = imageData.data[index];
+        var green = imageData.data[index + 1];
+        var blue  = imageData.data[index + 2];
+        var alpha = imageData.data[index + 3];
+        var pixel = [red, green, blue, alpha];
 
-      for(var x = 0; x < canvas.width; x++) {
-        for(var y = 0; y < canvas.height; y++){
+        var id        = context.createImageData(1,1); // only do this once per page
+        var new_pixel = id.data;
 
-          var index = (y*imageData.width + x) * 4;
-          var red   = imageData.data[index];
-          var green = imageData.data[index + 1];
-          var blue  = imageData.data[index + 2];
-          var alpha = imageData.data[index + 3];
-          var pixel = [red, green, blue, alpha];
-
-          var id        = context.createImageData(1,1); // only do this once per page
-          var new_pixel = id.data;
-
-          if(!defaultFilling) {
-            fillingColor = pixel;
-          }
-
-          var statement = createStatement(rgbas, pixel);
-
-          if(eval(statement)) {                        // only do this once per page
-            new_pixel[0] = fillingColor[0];
-            new_pixel[1] = fillingColor[1];
-            new_pixel[2] = fillingColor[2];
-            new_pixel[3] = fillingColor[3];
-          } else {
-            new_pixel[0] = backgroundColor[0];
-            new_pixel[1] = backgroundColor[1];
-            new_pixel[2] = backgroundColor[2];
-            new_pixel[3] = backgroundColor[3];
-          }
-          context.putImageData( id, x, y );
+        if(!defaultFilling) {
+          fillingColor = pixel;
         }
-      }
 
+        var statement = createStatement(rgbas, pixel);
+
+        if(eval(statement)) {                        // only do this once per page
+          new_pixel[0] = fillingColor[0];
+          new_pixel[1] = fillingColor[1];
+          new_pixel[2] = fillingColor[2];
+          new_pixel[3] = fillingColor[3];
+        } else {
+          new_pixel[0] = backgroundColor[0];
+          new_pixel[1] = backgroundColor[1];
+          new_pixel[2] = backgroundColor[2];
+          new_pixel[3] = backgroundColor[3];
+        }
+        context.putImageData( id, x, y );
+      }
     }
 
   }
