@@ -105,8 +105,24 @@ function getControls(withRemoveButton) {
       addRemoveButton();
     }
 
+    addColorpickers();
   });
 }
+
+//
+// Adds colorpickers.
+//
+function addColorpickers() {
+  var controls = $('.controls');
+  var cards    = controls.find('.card');
+  var card     = cards[cards.length - 1];
+
+  var matchColor = $(card).find('#matches-color');
+  var bgColor    = $(card).find('#bg-color');
+
+  $(matchColor).colorpicker({ inline: true, container: true });
+  $(bgColor).colorpicker({ inline: true, container: true, color: 'white' });
+};
 
 //
 // Removes a specific RGBA panel.
@@ -131,5 +147,6 @@ $('#add').on('click', function() {
 $(document).on('click', '.remove-rgba', function() {
   removeRGBAPanel($(this));
 })
+
 
 getControls();
