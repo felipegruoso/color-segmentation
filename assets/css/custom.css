@@ -5,3 +5,15 @@
 .side-nav > li:hover > a {
   color: #fff;
 }
+
+.full-body {
+  height: 100vh;
+}
+
+.full-nav {
+  height: 11vh;
+}
+
+.full-content {
+  height: 89vh;
+}
