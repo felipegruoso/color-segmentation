@@ -14,39 +14,61 @@
   <!-- Stylesheets -->
   <link rel="stylesheet" href="bower_components/materialize/dist/css/materialize.css" />
   <link rel="stylesheet" href="bower_components/nouislider/distribute/nouislider.min.css" />
-  <link rel="stylesheet" href="bower_components/materialize-colorpicker/dist/css/materialize-colorpicker.min.css"></script>
+  <link rel="stylesheet" href="bower_components/materialize-colorpicker/dist/css/materialize-colorpicker.min.css" />
   <link rel="stylesheet" href="assets/css/ghpages-materialize.css" />
   <link rel="stylesheet" href="assets/css/controls.css" />
+  <link rel="stylesheet" href="assets/css/custom.css" />
 
 </head>
 <body class="lighten grey lighten-4">
 
   <!-- Navbar -->
-  <!-- TODO: Adds Navbar correctly -->
+  <div class="navbar-fixed">
+    <nav class="teal">
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo">
+          <div class="container">Color Segmentation</div>
+        </a>
+        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul id="top-list" class="right hide-on-med-and-down">
+          <li>
+            <a>
+            <div class="file-field input-field">
+              <i class="material-icons left">backup</i>
+              <input id="input-files" type="file" multiple accept="image/*">
+              <div class="file-path-wrapper">
+                <input id="input-legend" class="file-path validate" type="text" placeholder="UPLOAD FILES">
+              </div>
+            </div>
+          </a>
+          </li>
+          <li id="clear"><a href="#"><i class="material-icons left">clear</i>CLEAR</a></li>
+          <li id="convert"><a href="#"><i class="material-icons left">loop</i>CONVERT</a></li>
+        </ul>
+        <ul class="side-nav" id="mobile-demo">
+          <li>
+            <a>
+            <div class="file-field input-field">
+              <i class="material-icons left">backup</i>
+              <input id="input-files" type="file" multiple accept="image/*">
+              <div class="file-path-wrapper">
+                <input id="input-legend" class="file-path validate" type="text" placeholder="UPLOAD">
+              </div>
+            </div>
+          </a>
+          </li>
+          <li id="clear"><a href="#"><i class="material-icons left">clear</i>CLEAR</a></li>
+          <li id="convert"><a href="#"><i class="material-icons left">loop</i>CONVERT</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
 
   <!-- Container -->
   <div class="row">
-    <div class="center col s12 m6">
-      <div class="file-field input-field">
-        <div class="btn">
-          <span><i class="material-icons">backup</i></span>
-          <input id="input-files" type="file" multiple accept="image/*">
-        </div>
-        <div class="file-path-wrapper">
-          <input id="input-legend" class="file-path validate" type="text" placeholder="Upload one or more files">
-        </div>
-      </div>
-    </div>
     <div class="center col s6 m3 clear-div">
-      <div class="file-field input-field">
-        <a id="clear" class="waves-effect waves-light btn-large"><i class="material-icons left">clear</i>CLEAR</a>
-      </div>
     </div>
-    <div class="center col s6 m3 convert-div">
-      <div class="right file-field input-field">
-        <a id="convert" class="waves-effect waves-light btn-large"><i class="material-icons left">loop</i>CONVERT</a>
-      </div>
-    </div>
+
     <div class="col s12 m7">
       <div id="content" class="row"></div>
     </div>
@@ -68,6 +90,7 @@
   <script type="text/javascript" src="assets/js/colorPanel.js"></script>
   <script type="text/javascript" src="assets/js/image.js"></script>
   <script type="text/javascript" src="assets/js/controls.js"></script>
+  <script type="text/javascript" src="assets/js/custom.js"></script>
 
 </body>
 </html>

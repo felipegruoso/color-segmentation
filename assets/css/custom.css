@@ -1,0 +1,7 @@
+.nav-wrapper > ul > li:hover {
+  background-color: #00695c;
+}
+
+.side-nav > li:hover > a {
+  color: #fff;
+}
