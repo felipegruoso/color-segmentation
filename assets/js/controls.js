@@ -76,16 +76,20 @@ function addRemoveButton() {
   var controls = document.getElementsByClassName('controls');
   var cards    = controls[0].children.length;
 
+  var div       = document.createElement('div');
+  div.className = "col s12 m12 center-align padding-remove-button";
+
   var button       = document.createElement('a');
-  button.className = "right btn-floating btn-large waves-effect waves-light red remove-rgba";
+  button.className = "btn-floating btn-large waves-effect waves-light red remove-rgba";
 
   var icon       = document.createElement('i');
   icon.className = "material-icons";
   icon.innerHTML = 'close';
 
   button.appendChild(icon);
+  div.appendChild(button)
 
-  controls[0].children[cards - 1].appendChild(button);
+  controls[0].children[cards - 1].appendChild(div);
 }
 
 //
@@ -130,7 +134,7 @@ function addColorpickers() {
 // @param { Object } btn the clicked button.
 //
 function removeRGBAPanel(btn) {
-  btn.context.parentNode.remove();
+  btn.context.parentNode.parentNode.remove();
 }
 
 //

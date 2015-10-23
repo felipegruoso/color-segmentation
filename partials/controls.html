@@ -1,53 +1,62 @@
 <div class="card">
-  <div class="card-content">
-    <div id="colorpicker">
-      <div class="col s2 m2">
-        <input type="text" id="highred" placeholder="R">
+  <div class="card-content card-padding">
+    <div class="row" id="colorpicker">
+      <div class="col s1 m1">
+        <input type="text" id="highred" placeholder="R" maxlength="3">
         <div class="sliders"></div>
-        <input type="text" id="lowred" placeholder="R">
+        <input type="text" id="lowred" class="low-color" placeholder="R" maxlength="3">
       </div>
 
-      <div class="col s2 m2">
-        <input type="text" id="highgreen" placeholder="G">
+      <div class="col s1 m1">
+        <input type="text" id="highgreen" placeholder="G" maxlength="3">
         <div class="sliders"></div>
-        <input type="text" id="lowgreen" placeholder="G">
+        <input type="text" id="lowgreen" class="low-color" placeholder="G" maxlength="3">
       </div>
 
-      <div class="col s2 m2">
-        <input type="text" id="highblue" placeholder="B">
+      <div class="col s1 m1">
+        <input type="text" id="highblue" placeholder="B" maxlength="3">
         <div class="sliders"></div>
-        <input type="text" id="lowblue" placeholder="B">
+        <input type="text" id="lowblue" class="low-color" placeholder="B" maxlength="3">
       </div>
 
-      <div class="col s2 m2">
-        <input type="text" id="highalpha" placeholder="A">
+      <div class="col s1 m1">
+        <input type="text" id="highalpha" placeholder="A" maxlength="3">
         <div class="sliders"></div>
-        <input type="text" id="lowalpha" placeholder="A">
+        <input type="text" id="lowalpha" class="low-color" placeholder="A" maxlength="3">
       </div>
 
-      <div class="col s4 m4 center-align">
+      <div class="col s8 m8 center-align">
         <div class="fill-controls">
-          <label>Fill matches with:</label>
-          <div id="matches-color" class="filling-color"></div>
-          <div class="switch">
-            <label>
-              Off
-              <input type="checkbox">
-              <span class="lever"></span>
-              On
-            </label>
+          <div class="col picker">
+            <label>Fill matches with:</label>
+            <div id="matches-color" class="filling-color"></div>
+          </div>
+          <div class="col switch-control">
+            <span>On</span>
+            <div class="switch vertical-switch">
+              <label>
+                <input type="checkbox">
+                <span class="lever"></span>
+              </label>
+            </div>
+            <span>Off</span>
           </div>
         </div>
+
         <div class="fill-controls">
-          <label>Fill background with:</label>
-          <div id="bg-color" class="filling-color"></div>
-          <div class="switch">
-            <label>
-              Off
-              <input type="checkbox">
-              <span class="lever"></span>
-              On
-            </label>
+          <div class="col picker">
+            <label>Fill matches with:</label>
+            <div id="bg-color" class="filling-color"></div>
+          </div>
+          <div class="col switch-control">
+            <span>On</span>
+            <div class="switch vertical-switch">
+              <label>
+                <input type="checkbox">
+                <span class="lever"></span>
+              </label>
+            </div>
+            <span>Off</span>
           </div>
         </div>
       </div>
