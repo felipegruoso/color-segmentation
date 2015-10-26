@@ -7,3 +7,5 @@ $('#content').slimScroll({
 $('#menu').slimScroll({
     height: '88vh'
 });
+
+$(".loader").hide();

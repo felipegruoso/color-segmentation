@@ -277,19 +277,24 @@ function getBackgroundColor(card) {
 
 }
 
-//
-// Handles the click on convert button.
-//
-$(document).on('click', '#convert', function() {
+function convert() {
   var rgbas           = getControlValues();
-
-  var card = document.getElementsByClassName('controls')[0];
+  var card            = document.getElementsByClassName('controls')[0];
   var fillingColor    = getFillingColor(card);
   var backgroundColor = getBackgroundColor(card);
 
   console.log(fillingColor, backgroundColor);
 
   segmentImages(rgbas, fillingColor, backgroundColor);
+
+  $('.loader').hide()
+}
+
+//
+// Handles the click on convert button.
+//
+$(document).on('click', '#convert', function() {
+  $('.loader').show(function() { convert() });
 });
 
 //
