@@ -124,8 +124,8 @@ function addColorpickers() {
   var matchColor = $(card).find('#matches-color');
   var bgColor    = $(card).find('#bg-color');
 
-  $(matchColor).colorpicker({ inline: true, container: true });
-  $(bgColor).colorpicker({ inline: true, container: true, color: 'white' });
+  $(matchColor).colorpicker({ inline: true, container: true, format: 'rgba' });
+  $(bgColor).colorpicker({ inline: true, container: true, color: 'white', format: 'rgba' });
 };
 
 //

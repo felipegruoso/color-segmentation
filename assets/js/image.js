@@ -244,8 +244,18 @@ function getControlValues() {
 //
 // @return { Object } an array containing the RGBA color.
 //
-function getFillingColor() {
-  return null;
+function getFillingColor(card) {
+  var matchSwitch      = $(card).find('#match-switch');
+  var matchColorpicker = $(card).find('#matches-color');
+
+  if(matchSwitch.is(':checked')) {
+    var color = $(matchColorpicker).data('colorpicker').color.toRGB();
+
+    return [color['r'], color['g'], color['b'], color['a'] * 255];
+  } else {
+    return null;
+  }
+
 }
 
 //
@@ -253,8 +263,18 @@ function getFillingColor() {
 //
 // @return { Object } an array containing the RGBA color.
 //
-function getBackgroundColor() {
-  return [255, 255, 255, 255];
+function getBackgroundColor(card) {
+  var matchSwitch      = $(card).find('#bg-switch');
+  var matchColorpicker = $(card).find('#bg-color');
+
+  if(matchSwitch.is(':checked')) {
+    var color = $(matchColorpicker).data('colorpicker').color.toRGB();
+
+    return [color['r'], color['g'], color['b'], color['a'] * 255];
+  } else {
+    return [255, 255, 255, 255];
+  }
+
 }
 
 //
@@ -262,8 +282,12 @@ function getBackgroundColor() {
 //
 $(document).on('click', '#convert', function() {
   var rgbas           = getControlValues();
-  var fillingColor    = getFillingColor();
-  var backgroundColor = getBackgroundColor();
+
+  var card = document.getElementsByClassName('controls')[0];
+  var fillingColor    = getFillingColor(card);
+  var backgroundColor = getBackgroundColor(card);
+
+  console.log(fillingColor, backgroundColor);
 
   segmentImages(rgbas, fillingColor, backgroundColor);
 });
