@@ -11,12 +11,13 @@ function updateRange(input) {
     value = 0;
   }
 
-  input.val(value);
+  input.val(parseInt(value));
 
-  var mainDiv   = input.closest('.col')[0];
+  var mainDiv   = input.closest('.control-row')[0];
+
   var slider    = mainDiv.children[1];
-  var lowInput  = mainDiv.children[2];
-  var highInput = mainDiv.children[0];
+  var lowInput  = mainDiv.children[0];
+  var highInput = mainDiv.children[2];
   var lowValue  = parseInt(lowInput.value);
   var highValue = parseInt(highInput.value);
 
