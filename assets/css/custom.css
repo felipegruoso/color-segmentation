@@ -2,18 +2,20 @@
   background-color: #00695c;
 }
 
-.side-nav > li:hover > a {
-  color: #fff;
+.center-img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.full-body {
-  height: 100vh;
+.inl-bl {
+  display: inline-block;
 }
 
-.full-nav {
-  height: 11vh;
+header, main, footer {
+  padding-left: 322px;
 }
 
-.full-content {
-  height: 89vh;
-}
+@media (max-width : 992px) {
+  header, main, footer {
+    padding-left: 0; } }

@@ -23,75 +23,116 @@
   </head>
   <body class="lighten grey lighten-4 full-body">
 
-    <!-- Navbar -->
-    <div class="navbar-fixed full-nav">
-      <nav class="teal">
-        <div class="nav-wrapper">
-          <a href="#" class="brand-logo">
-            <div class="container">Color Segmentation</div>
+  <header>
+    <nav class="teal">
+      <div class="nav-wrapper">
+
+        <a href="#" data-activates="mobile-demo" class="button-collapse">
+          <i class="material-icons">settings</i>
+        </a>
+        <a href="#" data-activates="nav-mobile" class="button-collapse right">
+          <i class="material-icons mobile-icon">equalizer</i>
+        </a>
+
+        <ul class="hide-on-med-and-down">
+          <li class="left">
+            <a>
+            <div class="file-field input-field">
+              <i class="material-icons left">backup</i>
+              <input id="input-files" type="file" multiple accept="image/*">
+              <div class="file-path-wrapper">
+                <input id="input-legend" class="file-path validate" type="text" placeholder="UPLOAD FILES">
+              </div>
+            </div>
           </a>
-          <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-          <ul id="top-list" class="right hide-on-med-and-down">
-            <li>
-              <a>
-              <div class="file-field input-field">
-                <i class="material-icons left">backup</i>
-                <input id="input-files" type="file" multiple accept="image/*">
-                <div class="file-path-wrapper">
-                  <input id="input-legend" class="file-path validate" type="text" placeholder="UPLOAD FILES">
-                </div>
+          </li>
+          <li id="clear" class="right"><a href="#"><i class="material-icons left">clear</i>CLEAR</a></li>
+          <li id="convert" class="right"><a href="#"><i class="material-icons left">loop</i>CONVERT</a></li>
+        </ul>
+
+        <ul class="side-nav" id="mobile-demo">
+          <li>
+            <a>
+            <div class="file-field input-field">
+              <i class="material-icons left">backup</i>
+              <input id="input-files" type="file" multiple accept="image/*">
+              <div class="file-path-wrapper">
+                <input id="input-legend" class="file-path validate" type="text" placeholder="UPLOAD">
               </div>
-            </a>
-            </li>
-            <li id="clear"><a href="#"><i class="material-icons left">clear</i>CLEAR</a></li>
-            <li id="convert"><a href="#"><i class="material-icons left">loop</i>CONVERT</a></li>
-          </ul>
-          <ul class="side-nav" id="mobile-demo">
-            <li>
-              <a>
-              <div class="file-field input-field">
-                <i class="material-icons left">backup</i>
-                <input id="input-files" type="file" multiple accept="image/*">
-                <div class="file-path-wrapper">
-                  <input id="input-legend" class="file-path validate" type="text" placeholder="UPLOAD">
-                </div>
-              </div>
-            </a>
-            </li>
-            <li id="clear"><a href="#"><i class="material-icons left">clear</i>CLEAR</a></li>
-            <li id="convert"><a href="#"><i class="material-icons left">loop</i>CONVERT</a></li>
-          </ul>
-        </div>
-      </nav>
-    </div>
+            </div>
+          </a>
+          </li>
+          <li id="clear"><a href="#"><i class="material-icons left">clear</i>CLEAR</a></li>
+          <li id="convert"><a href="#"><i class="material-icons left">loop</i>CONVERT</a></li>
+        </ul>
 
-    <!-- Container -->
-    <div class="row full-content">
-      <div class="col s12 m9">
-        <div id="content" class="row"></div>
       </div>
-      <div id="menu" class="col s12 m3">
-        <div class="controls">
-        </div>
-        <div class="center-align">
-          <a id="add" class="btn-floating btn-large waves-effect waves-light teal"><i class="material-icons">add</i></a>
-        </div>
-      </div>
-    </div>
+    </nav>
 
-    <div class="loader center-align">Converting...</div>
+    <ul id="nav-mobile" class="side-nav fixed" style="width: 322px;">
+      <li class="">
+        <img class="brand-logo center-img" width="100" src="/assets/images/logo.png">
+      </li>
+      <li class="center-align">
+        Color Segmentation
+      </li>
+      <li class="bold">
 
-    <!--JavaScript -->
-    <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
-    <script type="text/javascript" src="bower_components/materialize/dist/js/materialize.min.js"></script>
-    <script type="text/javascript" src="bower_components/nouislider/distribute/nouislider.min.js"></script>
-    <script type="text/javascript" src="bower_components/materialize-colorpicker/dist/js/materialize-colorpicker.min.js"></script>
-    <script type="text/javascript" src="bower_components/cryptojslib/rollups/md5.js"></script>
-    <script type="text/javascript" src="bower_components/slimScroll/jquery.slimscroll.min.js"></script>
-    <script type="text/javascript" src="assets/js/colorPanel.js"></script>
-    <script type="text/javascript" src="assets/js/image.js"></script>
-    <script type="text/javascript" src="assets/js/controls.js"></script>
-    <script type="text/javascript" src="assets/js/custom.js"></script>
+        <div class="inl-bl">
+          Fill matches with:
+          <div id="matches-color"></div>
+          <div class="switch center-align">
+            <label>
+              Off
+              <input type="checkbox">
+              <span class="lever"></span>
+              On
+            </label>
+          </div>
+        </div>
+
+        <div class="inl-bl">
+          Fill background with:
+          <div id="bg-color"></div>
+          <div class="switch center-align">
+            <label>
+              Off
+              <input type="checkbox">
+              <span class="lever"></span>
+              On
+            </label>
+          </div>
+        </div>
+
+      </li>
+
+      <li class="controls">
+      </li>
+
+      <li class="center-align">
+        <a id="add" class="btn-floating btn-large waves-effect waves-light teal"><i class="material-icons">add</i></a>
+      </li>
+
+    </ul>
+
+  </header>
+
+  <div id="content" class="row">
+  </div>
+
+  <div class="loader center-align">Converting...</div>
+
+  <!--JavaScript -->
+  <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+  <script type="text/javascript" src="bower_components/materialize/dist/js/materialize.min.js"></script>
+  <script type="text/javascript" src="bower_components/nouislider/distribute/nouislider.min.js"></script>
+  <script type="text/javascript" src="bower_components/materialize-colorpicker/dist/js/materialize-colorpicker.min.js"></script>
+  <script type="text/javascript" src="bower_components/cryptojslib/rollups/md5.js"></script>
+  <script type="text/javascript" src="bower_components/slimScroll/jquery.slimscroll.min.js"></script>
+  <script type="text/javascript" src="assets/js/colorPanel.js"></script>
+  <script type="text/javascript" src="assets/js/image.js"></script>
+  <script type="text/javascript" src="assets/js/controls.js"></script>
+  <script type="text/javascript" src="assets/js/custom.js"></script>
 
   </body>
 </html>

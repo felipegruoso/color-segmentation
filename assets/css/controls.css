@@ -1,11 +1,8 @@
-.filling-color {
-  min-width: 144px;
-}
-
 .sliders {
-  margin: 5px;
-  height: 205px;
-  width: 16px;
+  height: 8px;
+  width: 166px;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 .red {
@@ -24,74 +21,29 @@
   background: #eee;
 }
 
-.fill-controls {
-  margin: 2px;
-  padding: 5px;
-  width: 250px;
-  height: 145px;
-}
-
-.vertical-switch {
-  height: 50px;
-}
-
-.lever {
-  -webkit-transform: rotate(270deg);
-  -moz-transform: rotate(270deg);
-  -o-transform: rotate(270deg);
-  -ms-transform: rotate(270deg);
-  transform: rotate(270deg);
-  top: 12px;
-  margin-left: -10px !important;
-}
-
-.picker {
-  width: 150;
-  padding: 0;
-}
-
-.switch-control {
-  width: 27px;
-  padding: 0;
-  margin-top: 35px;
-  margin-left:150px;
-}
-
 input[type="text"]{
   width: 24px;
   height: 20px;
 }
 
-.low-color {
-  margin-top: 15px !important;
+.noUi-horizontal .noUi-handle {
+  height: 18px;
 }
 
-#colorpicker > .s1 {
-  margin-top: 7px !important;
-}
-
-#colorpicker {
-  margin: 0px;
-}
-
-.card-padding {
-  padding: 0 !important;
-}
-
-.noUi-vertical .noUi-handle {
-  width: 24px;
-  height: 34px;
-  left: -5px;
-  top: -17px;
-}
-
-.noUi-vertical .noUi-handle:after, .noUi-vertical .noUi-handle:before {
-  width: 9px;
-  height: 1px;
-  left: 6px;
-  top: 14px;
+.noUi-horizontal .noUi-handle:after, .noUi-horizontal .noUi-handle:before {
+  height: 6px;
 }
 
 .padding-remove-button {
   padding-bottom: 10px !important;
+}
+
+.control-row {
+  margin-bottom: -25px;
+}
+
+.remove-rgba, #add {
+  height: 55.5px !important;
+  padding: 0 !important;
+  margin: auto !important;
 }

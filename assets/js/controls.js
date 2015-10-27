@@ -9,8 +9,6 @@ function createSlider(slider, color) {
       start: [0, 255],
       step: 1,
       connect: true,
-      direction: 'rtl',
-      orientation: 'vertical',
       behaviour: 'tap-drag',
       range: {
           'min': 0,
@@ -44,8 +42,8 @@ function createSlider(slider, color) {
       var highInput = mainDiv.children[0];
       var lowInput  = mainDiv.children[2];
 
-      highInput.value = parseInt(values[1]);
-      lowInput.value  = parseInt(values[0]);
+      highInput.value = parseInt(values[0]);
+      lowInput.value  = parseInt(values[1]);
 
       highInput.style.color = 'black';
       lowInput.style.color  = 'black';
@@ -109,7 +107,6 @@ function getControls(withRemoveButton) {
       addRemoveButton();
     }
 
-    addColorpickers();
   });
 }
 
@@ -117,12 +114,8 @@ function getControls(withRemoveButton) {
 // Adds colorpickers.
 //
 function addColorpickers() {
-  var controls = $('.controls');
-  var cards    = controls.find('.card');
-  var card     = cards[cards.length - 1];
-
-  var matchColor = $(card).find('#matches-color');
-  var bgColor    = $(card).find('#bg-color');
+  var matchColor = $('#matches-color');
+  var bgColor    = $('#bg-color');
 
   $(matchColor).colorpicker({ inline: true, container: true, format: 'rgba' });
   $(bgColor).colorpicker({ inline: true, container: true, color: 'white', format: 'rgba' });
@@ -153,4 +146,5 @@ $(document).on('click', '.remove-rgba', function() {
 })
 
 
+addColorpickers();
 getControls();
