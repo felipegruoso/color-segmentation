@@ -245,8 +245,8 @@ function getControlValues() {
 // @return { Object } an array containing the RGBA color.
 //
 function getFillingColor(card) {
-  var matchSwitch      = $(card).find('#match-switch');
-  var matchColorpicker = $(card).find('#matches-color');
+  var matchSwitch      = $('#matches-switch');
+  var matchColorpicker = $('#matches-color');
 
   if(matchSwitch.is(':checked')) {
     var color = $(matchColorpicker).data('colorpicker').color.toRGB();
@@ -263,9 +263,9 @@ function getFillingColor(card) {
 //
 // @return { Object } an array containing the RGBA color.
 //
-function getBackgroundColor(card) {
-  var matchSwitch      = $(card).find('#bg-switch');
-  var matchColorpicker = $(card).find('#bg-color');
+function getBackgroundColor() {
+  var matchSwitch      = $('#bg-switch');
+  var matchColorpicker = $('#bg-color');
 
   if(matchSwitch.is(':checked')) {
     var color = $(matchColorpicker).data('colorpicker').color.toRGB();
