@@ -1,19 +1,22 @@
 {
-  "name": "color-segmentation",
-  "version": "0.0.0",
+  "name": "colorsegmentation",
+  "version": "1.0.0",
   "homepage": "https://github.com/felipegruoso/color-segmentation",
   "authors": [
-    "Felipe Gadelha Ruoso <felipe.gruoso@gmail.com>"
+    "Felipe Gadelha Ruoso <felipe.ruoso@boavistaservicos.com.br>"
   ],
   "description": "Segments images by color.",
-  "main": "index.html",
+  "main": "",
   "moduleType": [
-    "amd"
+    "amd",
+    "es6",
+    "globals",
+    "node",
+    "yui"
   ],
   "keywords": [
-    "segmentation",
-    "image",
-    "color"
+    "color",
+    "segmentation"
   ],
   "license": "MIT",
   "ignore": [
@@ -24,9 +27,10 @@
     "tests"
   ],
   "dependencies": {
-    "Materialize": "materialize#~0.97.1",
+    "materialize": "materialize#~0.97.1",
     "nouislider": "~8.0.2",
     "materialize-colorpicker": "*",
-    "cryptojslib": "~3.1.2"
+    "cryptojslib": "~3.1.2",
+    "slimScroll": "slimscroll#~1.3.6"
   }
 }

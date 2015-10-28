@@ -97,7 +97,7 @@ function addRemoveButton() {
 //                    to remove the control or not.
 //
 function getControls(withRemoveButton) {
-  $.get('partials/controls.html', function(data){
+  $.get('/views/partials/controls.html', function(data){
     $('.controls').append(data);
   })
   .done(function(){
