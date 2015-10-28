@@ -1,7 +1,8 @@
 //
 // Initializes an Hash to hold the uploaded images.
 //
-var images  = {};
+var images    = {};
+var loadError = 0;
 
 //
 // Removes a specific image card.
@@ -12,6 +13,29 @@ function removeCard(btn) {
   id = btn.context.dataset['id'];
   delete images[id];
   btn.closest('.card-panel').remove();
+}
+
+function loadImage(e) {
+  var img       = document.createElement('img');
+  img.src       = e.target.result;
+  img.className = 'file-result';
+
+  // For some unknown reason, the image with doesn't load.
+  // FIXME: This shouldn't happen.
+  if(img.width == 0) {
+    loadError += 1
+  } else {
+    md5Image = CryptoJS.MD5(img.src);
+
+    if(!images[md5Image]) {
+      images[md5Image] = {
+        height: img.height,
+        width:  img.width,
+        data:   img
+      }
+    }
+
+  }
 }
 
 //
@@ -28,21 +52,10 @@ function checkImageInputs(input, callback) {
   for (var i = 0; i < fileInputs.files.length; i++) {
     var fr = new FileReader();
     fr.onload = function(e) {
-      var img       = document.createElement('img');
-      img.src       = e.target.result;
-      img.className = 'file-result';
-
-      md5Image = CryptoJS.MD5(img.src);
-
-      if(!images[md5Image]) {
-        images[md5Image] = {
-          height: img.height,
-          width:  img.width,
-          data:   img
-        }
-      }
-
+      loadImage(e);
       left--;
+
+
       if(!left) {
         setTimeout(function() {
           callback(images);
@@ -111,6 +124,25 @@ function addOnScreen(images){
 
   }
 
+  if(loadError > 0) {
+
+    text = ''
+    if(loadError == 1) {
+      text = ' image was';
+    }
+    else {
+      text = ' images were';
+    }
+
+    swal({
+      title: 'Upload Error',
+      text: '<p>' + loadError.toString() + text + ' not loaded.</p><p>It is a bug, please reload the page if you want to upload more images.</p>',
+      type: 'warning',
+      html: true
+    })
+
+  }
+
 }
 
 //
@@ -126,7 +158,6 @@ function segmentImages(rgbas, matchColor, backgroundColor) {
 
   for(var key in images) {
     var image     = images[key];
-    console.log(image);
     var imageData = images[key]['data'];
 
     var img     = document.getElementById('canvas-' + key)
@@ -283,8 +314,6 @@ function convert() {
   var fillingColor    = getFillingColor(card);
   var backgroundColor = getBackgroundColor(card);
 
-  console.log(fillingColor, backgroundColor);
-
   segmentImages(rgbas, fillingColor, backgroundColor);
 
   $('.loader').hide()
@@ -314,7 +343,7 @@ $(document).on('click', '#clear', function() {
 // Handles the changes on files input.
 //
 $(document).on('change', '#input-files', function() {
-  $('#input-legend').val('');
+  loadError = 0;
   checkImageInputs($(this), addOnScreen);
 });
 
